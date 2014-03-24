@@ -3,7 +3,9 @@ SimpleCms::Application.routes.draw do
 
   #get "demo/index"
   
-  root "demo#index"
+  #changed root from demo to subjects
+  root "subjects#index"
+  
   #default route, replaces simple route
   match ':controller(/:action(/:id))', :via => [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
