@@ -13,6 +13,7 @@ class SubjectsController < ApplicationController
   def new
     #not necessary, but good practive
     #sets default values
+    @subject_count = Subject.count + 1
     @subject = Subject.new({:name => "Default"})
   end
 
@@ -26,12 +27,14 @@ class SubjectsController < ApplicationController
       redirect_to(:action => 'index')
     else
       #If save fails, redisplay the form so user can fix problems
+      @subject_count = Subject.count + 1
       render('new')
     end
   end
 
   def edit
     @subject = Subject.find(params[:id])
+    @subject_count = Subject.count
   end
 
   #a lot like create
@@ -46,6 +49,7 @@ class SubjectsController < ApplicationController
       redirect_to(:action => 'show', :id => @subject.id)
     else
       #If update fails, redisplay the form so user can fix problems
+      @subject_count = Subject.count
       render('edit')
     end
   end
@@ -65,7 +69,7 @@ class SubjectsController < ApplicationController
       #same as using "params[:subject]", except that it:
       # - raises the error if :subject is not present
       # - allows listed attributes to be mass-assigned
-      params.require(:subject).permit(:name, :position, :visible)
+      params.require(:subject).permit(:name, :position, :visible, :create_at)
     end
   
 end

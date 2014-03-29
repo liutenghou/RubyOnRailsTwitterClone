@@ -11,7 +11,9 @@ class SectionsController < ApplicationController
   end
 
   def new
+    @pages = Page.order('position ASC')
     @section = Section.new({:name => "Default"})
+    @section_count = Section.count + 1
   end
 
   def create
@@ -20,11 +22,15 @@ class SectionsController < ApplicationController
       flash[:notice] = "Section created successfully."
       redirect_to(:action => 'index')
     else
+      @pages = Page.order('position ASC')
+      @section_count = Section.count + 1
       render('new')
     end
   end
 
   def edit
+    @pages = Page.order('position ASC')
+    @section_count = Section.count
     @section = Section.find(params[:id])
   end
 
@@ -34,6 +40,8 @@ class SectionsController < ApplicationController
       flash[:notice] = "Page updated successfully"
       redirect_to(:action => 'show', :id => @section.id)
     else
+      @pages = Page.order('position ASC')
+      @section_count = Section.count
       render('edit')
     end
   end

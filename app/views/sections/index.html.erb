@@ -16,7 +16,10 @@
 		<% @sections.each do |section| %>
 		<tr>
 			<td><%= section.position %></td>
+			<td><%= section.page_id %></td>
 			<td><%= section.name %></td>
+			<td><%= section.content_type %></td>
+
 			<td class="center"><%= status_tag(section.visible) %></td>
 			<td class="actions">
 				<%= link_to("Show", {:action => 'show', :id => section.id}, :class => 'action show') %>
