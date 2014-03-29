@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  layout false
+  layout "admin"
 
   def index
     #assemble a list of all of the subjectss
