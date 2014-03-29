@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   layout false
 
   def index
-    @page = Page.sorted
+    @pages = Page.sorted
   end
 
   def show
@@ -39,14 +39,18 @@ class PagesController < ApplicationController
   end
 
   def delete
-    @page = Page.find(params[:id]).destroy
+    @page = Page.find(params[:id])
+  end
+
+  def destroy
+    page = Page.find(params[:id]).destroy
     flash[:notice] = "Page destroyed successfully"
     redirect_to(:action => 'index')
   end
 
   private 
-  def page_params
-    #TODO need to permit things here
-    params.require(:page).permit()
-
+    def page_params
+      #whitelisted page_params
+      params.require(:page).permit(:subject_id, :name, :permalink, :position, :visible)
+    end
 end
