@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   layout "admin"
+  before_action :confirm_logged_in
 
   def index
     #assemble a list of all of the subjectss
